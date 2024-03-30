@@ -19,17 +19,6 @@ const userSchema = new mongoose.Schema({
     required: [true, "Email Is Required!"],
     validate: [validator.isEmail, "Provide A Valid Email!"],
   },
-  phone: {
-    type: String,
-    required: [true, "Phone Is Required!"],
-    minLength: [10, "Phone Number Must Contain Exact 10 Digits!"],
-    maxLength: [10, "Phone Number Must Contain Exact 10 Digits!"],
-  },
-  gender: {
-    type: String,
-    required: [true, "Gender Is Required!"],
-    enum: ["Male", "Female", "Other"],
-  },
   password: {
     type: String,
     required: [true, "Password Is Required!"],
