@@ -14,7 +14,7 @@ export const visitorRegister = catchAsyncErrors(async (req, res, next) => {
     !email ||
     !password
   ) {
-    return next(new ErrorHandler("Please Fill Full Form!", 400));
+    return next(new ErrorHandler(`Please fill full form!`, 400));
   }
 
   const isRegistered = await User.findOne({ email });
