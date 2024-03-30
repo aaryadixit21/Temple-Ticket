@@ -1,0 +1,29 @@
+.homepage-container {
+    max-width: 800px; /* Adjust as needed */
+    margin: 0 auto; /* Center the content horizontally */
+  }
+  
+  .homepage-content {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .text-content {
+    width: 90%; /* Adjust as needed */
+  }
+  
+  .image-content {
+    width: 10%; /* Adjust as needed */
+  }
+  .title {
+    font-size: 40px; /* Adjust as needed */
+  }
+  
+  .subtitle {
+    font-size: 30px; /* Adjust as needed */
+  }
+  
+  .paragraph {
+    font-size: 25px; /* Adjust as needed */
+  }
+    

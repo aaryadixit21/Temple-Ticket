@@ -1,40 +1,65 @@
+import { useContext } from 'react';
 import { Link, useLocation } from "react-router-dom";
 import "./Navbar.css"; // Import CSS file for Navbar styles
-import logoimg from './logo.jpg'
-
+import logoimg from './logo.jpg';
+import { Context } from "../index";
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Navbar = () => {
   const location = useLocation();
+  const { isAuthenticated, setIsAuthenticated } = useContext(Context);
 
-  // Function to determine if we are on the login or register page
   const isLoginPage = location.pathname === "/login";
   const isRegisterPage = location.pathname === "/register";
+
+  const handleLogout = async () => {
+    try {
+      const response = await axios.get("your_logout_endpoint", {
+        withCredentials: true,
+      });
+      toast.success(response.data.message);
+      setIsAuthenticated(false);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
 
   return (
     <nav className="navbar">
       <div className="navbar-container">
         <div className="navbar-logo">
-        <img
-            src={logoimg}
-        />
+          <img src={logoimg} alt="Logo" />
         </div>
-
         <div className="navbar-buttons">
-          {/* Render buttons based on current page */}
-          {!isLoginPage && !isRegisterPage && (
+        <Link to="/">
+              <button>Home</button>
+            </Link>
+        <Link to="/history">
+              <button>History</button>
+            </Link>
+            <Link to="/lordram">
+              <button>Lord Ram</button>
+            </Link>
+            <Link to="/gallery">
+              <button>Gallery</button>
+            </Link>
+            {isAuthenticated && (
+              <Link to="/bookticket"><button>Book ticket</button></Link>
+          )}
+          {!isAuthenticated && !isLoginPage && !isRegisterPage && (
             <Link to="/login">
-              <button>Log in</button>
+              <button>Login</button>
             </Link>
           )}
-          {!isRegisterPage && !isLoginPage && (
+          {!isAuthenticated && !isRegisterPage && !isLoginPage && (
             <Link to="/register">
               <button>Register</button>
             </Link>
           )}
-          {(isRegisterPage || isLoginPage) && (
-            <Link to="/">
-              <button>Home</button>
-            </Link>
+          
+          {isAuthenticated && (
+            <button onClick={handleLogout}>Logout</button>
           )}
         </div>
       </div>
