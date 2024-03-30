@@ -14,7 +14,7 @@ export const visitorRegister = catchAsyncErrors(async (req, res, next) => {
     !email ||
     !password
   ) {
-    return next(new ErrorHandler("Please Fill Full Form!", 400));
+    return next(new ErrorHandler(`Please fill full form!`, 400));
   }
 
   const isRegistered = await User.findOne({ email });
@@ -47,5 +47,27 @@ export const login = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("Invalid Email Or Password!", 400));
   }
   generateToken(user, "Login Successfully!", 201, res);
+});
+
+export const getUserDetails = catchAsyncErrors(async (req, res, next) => {
+  const user = req.user;
+  res.status(200).json({
+    success: true,
+    user,
+  });
+});
+
+// Logout function for frontend visitor
+export const logoutVisitor = catchAsyncErrors(async (req, res, next) => {
+  res
+    .status(201)
+    .cookie("visitorToken", "", {
+      httpOnly: true,
+      expires: new Date(Date.now()),
+    })
+    .json({
+      success: true,
+      message: "visitor Logged Out Successfully.",
+    });
 });
 
