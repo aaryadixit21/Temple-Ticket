@@ -3,6 +3,8 @@ import validator from "validator";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+//user contains first name last name email and password (removed phone and gender)
+
 const userSchema = new mongoose.Schema({
   firstName: {
     type: String,

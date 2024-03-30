@@ -5,6 +5,7 @@ import { generateToken } from "../utils/jwtToken.js";
 import cloudinary from "cloudinary";
 
 export const visitorRegister = catchAsyncErrors(async (req, res, next) => {
+
   const { firstName, lastName, email, password } =
     req.body;
   if (
