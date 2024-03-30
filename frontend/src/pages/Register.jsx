@@ -31,12 +31,7 @@ export default function Register() {
           </div>
           <div className="form-group">
             <label htmlFor="email"></label>
-            <input
-              type="email"
-              placeholder="Email"
-              name="email"
-              id="email"
-            />
+            <input type="email" placeholder="Email" name="email" id="email" />
           </div>
           <div className="form-group">
             <label htmlFor="password"></label>
@@ -47,8 +42,10 @@ export default function Register() {
               id="password"
             />
           </div>
-          {location.pathname === '/register' && (
-            <button className="register-button" type="submit">Register</button>
+          {location.pathname === "/register" && (
+            <button className="register-button" type="submit">
+              Register
+            </button>
           )}
         </form>
         <h5>Already have an account?</h5>

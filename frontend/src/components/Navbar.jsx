@@ -1,10 +1,10 @@
-import { useContext } from 'react';
+import { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./Navbar.css"; // Import CSS file for Navbar styles
-import logoimg from './logo.jpg';
+import logoimg from "./logo.jpg";
 import { Context } from "../index";
-import axios from 'axios';
-import { toast } from 'react-toastify';
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const location = useLocation();
@@ -32,20 +32,13 @@ const Navbar = () => {
           <img src={logoimg} alt="Logo" />
         </div>
         <div className="navbar-buttons">
-        <Link to="/">
-              <button>Home</button>
+          <Link to="/">
+            <button>Home</button>
+          </Link>
+          {isAuthenticated && (
+            <Link to="/bookticket">
+              <button>Book ticket</button>
             </Link>
-        <Link to="/history">
-              <button>History</button>
-            </Link>
-            <Link to="/lordram">
-              <button>Lord Ram</button>
-            </Link>
-            <Link to="/gallery">
-              <button>Gallery</button>
-            </Link>
-            {isAuthenticated && (
-              <Link to="/bookticket"><button>Book ticket</button></Link>
           )}
           {!isAuthenticated && !isLoginPage && !isRegisterPage && (
             <Link to="/login">
@@ -57,10 +50,8 @@ const Navbar = () => {
               <button>Register</button>
             </Link>
           )}
-          
-          {isAuthenticated && (
-            <button onClick={handleLogout}>Logout</button>
-          )}
+
+          {isAuthenticated && <button onClick={handleLogout}>Logout</button>}
         </div>
       </div>
     </nav>
@@ -68,6 +59,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-
-

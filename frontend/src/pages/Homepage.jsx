@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import Homepage1 from "../components/homepage1.jpg"; // Import your image files
 import Homepage2 from "../components/homepage2.jpg";
 import Homepage3 from "../components/homepage3.jpg";
@@ -16,29 +15,34 @@ const Homepage = () => {
   useEffect(() => {
     // Automatically switch to the next slide every 3 seconds
     const intervalId = setInterval(() => {
-      setCurrentSlide((prevSlide) => (prevSlide === slides.length - 1 ? 0 : prevSlide + 1));
+      setCurrentSlide((prevSlide) =>
+        prevSlide === slides.length - 1 ? 0 : prevSlide + 1
+      );
     }, 3000);
 
     // Clear the interval when component unmounts
     return () => clearInterval(intervalId);
   }, [slides.length]); // Dependency on slides.length to re-run the effect when the number of slides changes
 
-  
   return (
     <div className="homepage-container">
       <div className="homepage-content">
         <div className="text-content">
           <h2 className="title">Shri Ram Mandir</h2>
           <h4 className="subtitle">Birth Place of Lord Ram</h4>
-          <p className="paragraph">A Hindu temple that is being built in Ayodhya, Uttar Pradesh, India, at the site of Ram Janmabhoomi, the birthplace of Lord Ram, a principal deity of Hinduism.</p>
-          <p className="paragraph">The temple construction is being supervised by the Shri Ram Janmabhoomi Teerth Kshetra. The ground-breaking ceremony was performed on 5 August 2020 by India’s prime minister Narendra Modi.</p>
-          <Link to="/history">
-            <button>Discover more</button>
-          </Link>
+          <p className="paragraph">
+            A Hindu temple that is being built in Ayodhya, Uttar Pradesh, India,
+            at the site of Ram Janmabhoomi, the birthplace of Lord Ram, a
+            principal deity of Hinduism.
+          </p>
+          <p className="paragraph">
+            The temple construction is being supervised by the Shri Ram
+            Janmabhoomi Teerth Kshetra. The ground-breaking ceremony was
+            performed on 5 August 2020 by India’s prime minister Narendra Modi.
+          </p>
         </div>
         <div className="image-content">
           <img src={slides[currentSlide]} alt="" />
-          
         </div>
       </div>
     </div>
@@ -46,4 +50,3 @@ const Homepage = () => {
 };
 
 export default Homepage;
-
