@@ -31,6 +31,11 @@ const Navbar = () => {
               <button>Register</button>
             </Link>
           )}
+          {(isRegisterPage || isLoginPage) && (
+            <Link to="/">
+              <button>Home</button>
+            </Link>
+          )}
         </div>
       </div>
     </nav>
