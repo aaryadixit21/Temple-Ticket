@@ -1,4 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
+import "./Navbar.css"; // Import CSS file for Navbar styles
+import logoimg from './logo.jpg'
+
 
 const Navbar = () => {
   const location = useLocation();
@@ -8,21 +11,22 @@ const Navbar = () => {
   const isRegisterPage = location.pathname === "/register";
 
   return (
-    <nav>
-      <div>
-        <div>
-          <Link to="/">icon</Link>
-          <div></div>
+    <nav className="navbar">
+      <div className="navbar-container">
+        <div className="navbar-logo">
+        <img
+            src={logoimg}
+        />
         </div>
 
-        <div>
+        <div className="navbar-buttons">
           {/* Render buttons based on current page */}
-          {!isLoginPage && !isRegisterPage &&(
+          {!isLoginPage && !isRegisterPage && (
             <Link to="/login">
               <button>Log in</button>
             </Link>
           )}
-          {!isRegisterPage && !isLoginPage &&(
+          {!isRegisterPage && !isLoginPage && (
             <Link to="/register">
               <button>Register</button>
             </Link>
@@ -34,3 +38,6 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
+
