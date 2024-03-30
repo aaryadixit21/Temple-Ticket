@@ -49,3 +49,25 @@ export const login = catchAsyncErrors(async (req, res, next) => {
   generateToken(user, "Login Successfully!", 201, res);
 });
 
+export const getUserDetails = catchAsyncErrors(async (req, res, next) => {
+  const user = req.user;
+  res.status(200).json({
+    success: true,
+    user,
+  });
+});
+
+// Logout function for frontend visitor
+export const logoutVisitor = catchAsyncErrors(async (req, res, next) => {
+  res
+    .status(201)
+    .cookie("visitorToken", "", {
+      httpOnly: true,
+      expires: new Date(Date.now()),
+    })
+    .json({
+      success: true,
+      message: "visitor Logged Out Successfully.",
+    });
+});
+
