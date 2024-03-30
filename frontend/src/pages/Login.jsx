@@ -1,28 +1,63 @@
-import { Link } from "react-router-dom";
-import "./Login.css"; // Import the CSS file where you define your styles
+import { useContext, useState } from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import "./Login.css";
+import { Context } from "../index";
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
-export default function Login() {
+const Login = () => {
+    const { isAuthenticated, setIsAuthenticated } = useContext(Context);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const navigateTo = useNavigate();
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post("your_login_endpoint",
+                { email, password },
+                {
+                    withCredentials: true,
+                    headers: { "Content-Type": "application/json" },
+                }
+            );
+            toast.success(response.data.message);
+            setIsAuthenticated(true);
+            navigateTo("/");
+        } catch (error) {
+            toast.error(error.response.data.message);
+        }
+    };
+
+    if (isAuthenticated) {
+        return <Navigate to={"/"} />;
+    }
+
     return (
         <div className="login-container">
             <div className="login-form">
                 <h4>Login</h4>
-                <form>
+                <form onSubmit={handleLogin}>
                     <div className="form-group">
-                        <label htmlFor="email"></label>
+                        <label htmlFor="email">Email:</label>
                         <input
                             type="text"
+                            value={email}
                             placeholder="Enter your email"
                             autoComplete="off"
                             name="email"
+                            onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="password"></label>
+                        <label htmlFor="password">Password:</label>
                         <input
                             type="password"
+                            value={password}
                             placeholder="Enter your password"
                             name="password"
-                            id="password" 
+                            id="password"
+                            onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
                     <button type="submit">Login</button>
@@ -33,5 +68,6 @@ export default function Login() {
                 </form>
             </div>
         </div>
-    );
-}
+    )
+};
+export default Login;
